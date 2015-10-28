@@ -1,0 +1,16 @@
+default: &default
+  adapter: mysql2
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *default
+  database: poc_pagecounter_development
+
+test:
+  <<: *default
+  database: poc_pagecounter_test
+
+production:
+  <<: *default
+  database: poc_pagecounter_production
