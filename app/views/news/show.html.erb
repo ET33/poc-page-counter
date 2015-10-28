@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<table>
+  <thead>
+    <tr>
+      <th><h2>News Information</h2></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Name</th>
+      <th>Text</th>
+    </tr>
+    <tr>
+      <td><%= @news.name %></td>
+      <td><%= @news.text %></td>
+    </tr>
+  </tbody>
+</table>
+
+<%= link_to 'Edit', edit_news_path(@news) %> |
+<%= link_to 'Back', news_index_path %>
