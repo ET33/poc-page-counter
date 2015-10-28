@@ -1,7 +1,6 @@
 class PageCountController < ApplicationController
-  require "redis"
-
   def inc_page_count
     render nothing: true
+    # TODO gonna use redis here?
   end
 end
