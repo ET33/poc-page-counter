@@ -10,7 +10,8 @@ class NewsController < ApplicationController
   # GET /news/1
   # GET /news/1.json
   def show
-    $redis.zincrby(:page_counter, 1, params[:id])
+    # Using the ID column as a 'member' because the slug may change
+    $redis.zincrby(:page_counter, 1, News.find(params[:id]).id)
   # Tag script <%= javascript_tag nil, src: count_page_path(request.original_fullpath) %>
   # To get top 10 readed: `$redis.zrangebyscore(:page_counter, :'-inf', :'+inf').reverse`
   # optional: `withscore: true`

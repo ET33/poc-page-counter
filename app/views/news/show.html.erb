@@ -18,5 +18,17 @@
   </tbody>
 </table>
 
+<h3>Top readed</h3>
+<ul>
+  <% $redis.zrangebyscore(:page_counter, :'-inf', :'+inf', withscores: true).reverse.each do |data| %>
+  <li>
+    <strong>
+      <%= data.first %>
+    </strong>
+    <%= "with #{data.last} visits" %>
+  </li>
+  <% end -%>
+</ul>
+
 <%= link_to 'Edit', edit_news_path(@news) %> |
 <%= link_to 'Back', news_index_path %>
