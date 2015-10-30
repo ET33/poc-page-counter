@@ -1,5 +1,4 @@
 <p id="notice"><%= notice %></p>
-
 <table>
   <thead>
     <tr>
@@ -18,17 +17,19 @@
   </tbody>
 </table>
 
-<h3>Top readed</h3>
-<ul>
-  <% $redis.zrangebyscore(:page_counter, :'-inf', :'+inf', withscores: true).reverse.each do |data| %>
-  <li>
-    <strong>
-      <%= data.first %>
-    </strong>
-    <%= "with #{data.last} visits" %>
-  </li>
-  <% end -%>
-</ul>
+<% if @most_read %>
+  <h3>Top readed</h3>
+  <ul>
+    <% @most_read.each do |member, score| %>
+      <li>
+        <strong>
+          <%= member %>
+        </strong>
+        <%= "with #{score} visits" %>
+      </li>
+    <% end -%>
+  </ul>
+<% end -%>
 
 <%= link_to 'Edit', edit_news_path(@news) %> |
 <%= link_to 'Back', news_index_path %>
