@@ -10,15 +10,9 @@ class NewsController < ApplicationController
   # GET /news/1
   # GET /news/1.json
   def show
-    begin
-      # Using the ID column as a 'member' because the slug may change
-      $redis.zincrby(:page_counter, 1, News.find(params[:id]).id)
-      # Tag script <%= javascript_tag nil, src: count_page_path(request.original_fullpath) %>
-      # To get top read: `$redis.zrangebyscore(:page_counter, :'-inf', :'+inf').reverse`
-      # optional: `withscore: true`
-      @most_read = $redis.zrangebyscore(:page_counter, :'-inf', :'+inf', withscores: true).reverse
-    rescue
-      @most_read = nil
+    RedisPool.redis.with do |conn|
+      pageview_repository = PageViewRepository.new
+      pageview_repository.increment_news(News.find(params[:id]))
     end
   end
 

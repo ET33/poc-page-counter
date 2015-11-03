@@ -12,6 +12,7 @@ gem "jquery-rails"
 gem "jbuilder", "~> 2.0"
 gem "redis"
 gem "friendly_id"
+gem "connection_pool", "~> 2.2.0"
 
 group :development, :test do
   gem "byebug"

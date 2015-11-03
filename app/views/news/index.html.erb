@@ -18,6 +18,16 @@
         <td><%= link_to 'Destroy', news, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
+    <% if @most_read_news.any? %>
+      <tr>
+        <th>Most Read News</th>
+      </tr>
+      <% @most_read_news.each do |news| %>
+        <tr>
+          <td><%= news.name %></td>
+        </tr>
+      <% end -%>
+    <% end -%>
   </tbody>
 </table>
 
